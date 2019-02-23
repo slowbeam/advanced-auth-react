@@ -38,3 +38,18 @@ axios.interceptors.response.use(
     },
     error => Promise.reject(error)
 )
+
+export const apiRequest = async({path, method = "GET", data, headers}) => {
+    try {
+        const response = await axios({
+            url: API_URL + path,
+            method,
+            data: data || {},
+            headers: Object.assign({DEFAULT_HEADERS, headers})
+        })
+        return response;
+    }
+    catch (e) {
+        return e;
+    }
+}
